@@ -1,1 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImprobIA - Consultoría de IA y Desarrollo Web</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 class="logo">ImprobIA</h1>
+        <nav>
+            <ul>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#about">Sobre mí</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Soluciones inteligentes para tu negocio</h2>
+            <p>Consultoría en Inteligencia Artificial, Informática y Desarrollo Web personalizada para PYMES</p>
+            <a href="#contacto" class="cta">Solicita tu asesoría gratuita</a>
+        </div>
+    </section>
+
+    <section id="servicios" class="servicios">
+        <h3>¿Qué ofrecemos?</h3>
+        <div class="cards">
+            <div class="card">
+                <h4>Consultoría de IA</h4>
+                <p>Automatización de procesos, análisis de datos, asistentes virtuales y soluciones personalizadas.</p>
+            </div>
+            <div class="card">
+                <h4>Desarrollo Web</h4>
+                <p>Páginas modernas, aplicaciones a medida, e-commerce y portales administrables.</p>
+            </div>
+            <div class="card">
+                <h4>Soporte Informático</h4>
+                <p>Mantenimiento, optimización y seguridad para tus sistemas y equipos.</p>
+            </div>
+            <div class="card">
+                <h4>Formación a medida</h4>
+                <p>Capacitación en digitalización, IA y uso eficiente de herramientas digitales para equipos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h3>Sobre ImprobIA</h3>
+        <p>
+            Soy Jorge Ibañez, ingeniero en informática y apasionado de la Inteligencia Artificial. Tras varios años ayudando a pequeñas y medianas empresas a digitalizarse y mejorar su competitividad, decidí lanzar ImprobIA: una consultoría centrada en hacer accesible la IA y la tecnología puntera para cualquier negocio, sin importar su tamaño.
+        </p>
+    </section>
+
+    <section id="contacto" class="contacto">
+        <h3>Contacto</h3>
+        <form autocomplete="off">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>© 2025 ImprobIA · Consultoría IT &amp; IA</p>
+    </footer>
+
+    <script>
+        // Simple scroll animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animated = document.querySelectorAll('.card, .about, .contacto form');
+            window.addEventListener('scroll', () => {
+                animated.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top < window.innerHeight - 50) {
+                        el.classList.add('visible');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
