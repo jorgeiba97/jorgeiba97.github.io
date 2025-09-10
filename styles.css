@@ -8,14 +8,12 @@
     --radius: 18px;
     --transition: all 0.38s cubic-bezier(.22,.68,.33,1.05);
 }
-
 body {
     margin: 0;
     font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
     background: var(--bg);
     color: var(--main);
 }
-
 header {
     display: flex;
     justify-content: space-between;
@@ -23,13 +21,11 @@ header {
     background: var(--main);
     padding: 1rem 2rem;
 }
-
 .logo {
     color: #fff;
     margin: 0;
     font-family: 'Montserrat', Arial, sans-serif;
 }
-
 nav ul {
     display: flex;
     gap: 1.5rem;
@@ -37,7 +33,6 @@ nav ul {
     margin: 0;
     padding: 0;
 }
-
 nav a {
     color: #fff;
     text-decoration: none;
@@ -55,7 +50,6 @@ nav a::after {
 nav a:hover::after {
     width: 100%;
 }
-
 .hero {
     min-height: 60vh;
     background: linear-gradient(120deg, var(--main) 60%, var(--accent) 120%);
@@ -95,7 +89,6 @@ nav a:hover::after {
     color: var(--accent);
     border: 2px solid var(--accent);
 }
-
 .servicios {
     padding: 3rem 1rem 1rem;
     background: #fff;
@@ -129,7 +122,6 @@ nav a:hover::after {
     color: var(--accent);
     margin-bottom: .7rem;
 }
-
 .about {
     padding: 3rem 1rem 2rem;
     background: var(--bg);
@@ -148,7 +140,6 @@ nav a:hover::after {
 .about h3 {
     color: var(--main);
 }
-
 .contacto {
     padding: 3rem 1rem;
     background: #fff;
@@ -198,7 +189,6 @@ button[type=submit] {
 button[type=submit]:hover {
     background: var(--sec);
 }
-
 footer {
     background: var(--main);
     color: #fff;
@@ -206,7 +196,6 @@ footer {
     padding: 1.2rem;
     margin-top: 2rem;
 }
-
 @media (max-width: 900px) {
     .cards {
         flex-direction: column;
@@ -219,3 +208,58 @@ footer {
     }
 }
 
+/* FAQ Section */
+.faq {
+    padding: 3rem 1rem;
+    background: var(--bg);
+    max-width: 800px;
+    margin: auto;
+}
+.faq h3 {
+    text-align: center;
+    color: var(--main);
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+}
+.faq-item {
+    background: var(--card);
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: var(--transition);
+}
+.faq-question {
+    background: var(--main);
+    color: #fff;
+    padding: 1.2rem 2rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+    width: 100%;
+    text-align: left;
+    transition: var(--transition);
+}
+.faq-question:hover {
+    background: var(--sec);
+}
+.faq-answer {
+    padding: 1.5rem 2rem;
+    background: var(--card);
+    color: var(--main);
+    line-height: 1.6;
+    display: none;
+}
+.faq-answer.active {
+    display: block;
+}
+.faq-question::after {
+    content: '+';
+    float: right;
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+.faq-question.active::after {
+    transform: rotate(45deg);
+}
