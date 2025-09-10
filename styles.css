@@ -1,1 +1,221 @@
+:root {
+    --main: #162447;
+    --sec: #1f4068;
+    --accent: #e43f5a;
+    --bg: #f4f4f6;
+    --card: #fff;
+    --shadow: 0 4px 24px rgba(22,36,71,0.08);
+    --radius: 18px;
+    --transition: all 0.38s cubic-bezier(.22,.68,.33,1.05);
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Verdana, Geneva, Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--main);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--main);
+    padding: 1rem 2rem;
+}
+
+.logo {
+    color: #fff;
+    margin: 0;
+    font-family: 'Montserrat', Arial, sans-serif;
+}
+
+nav ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+}
+nav a::after {
+    content: '';
+    display: block;
+    background: var(--accent);
+    height: 2px;
+    width: 0%;
+    transition: width 0.3s;
+}
+nav a:hover::after {
+    width: 100%;
+}
+
+.hero {
+    min-height: 60vh;
+    background: linear-gradient(120deg, var(--main) 60%, var(--accent) 120%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    animation: slideDown 1s cubic-bezier(.36,.54,.49,.89) 0.2s both;
+}
+@keyframes slideDown {
+    0% { opacity: 0; transform: translateY(-45px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+.hero-content h2 {
+    font-size: 2.6rem;
+    margin-bottom: .5rem;
+}
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+}
+.cta {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 0.8rem 2.1rem;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: .7rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+.cta:hover {
+    background: #fff;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+}
+
+.servicios {
+    padding: 3rem 1rem 1rem;
+    background: #fff;
+    text-align: center;
+}
+.servicios h3 {
+    margin-bottom: 2.2rem;
+    font-size: 2.2rem;
+}
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+.card {
+    background: var(--card);
+    box-shadow: var(--shadow);
+    padding: 2.3rem 1.7rem;
+    border-radius: var(--radius);
+    width: 270px;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(45px);
+}
+.card.visible {
+    opacity: 1;
+    transform: none;
+}
+.card h4 {
+    color: var(--accent);
+    margin-bottom: .7rem;
+}
+
+.about {
+    padding: 3rem 1rem 2rem;
+    background: var(--bg);
+    max-width: 740px;
+    margin: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(45px);
+    transition: var(--transition);
+}
+.about.visible {
+    opacity: 1;
+    transform: none;
+}
+.about h3 {
+    color: var(--main);
+}
+
+.contacto {
+    padding: 3rem 1rem;
+    background: #fff;
+}
+.contacto h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 440px;
+    margin: auto;
+    gap: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2rem;
+    opacity: 0;
+    transform: translateY(45px);
+    transition: var(--transition);
+    background: var(--bg);
+}
+form.visible {
+    opacity: 1;
+    transform: none;
+}
+input, textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 1.4px solid var(--sec);
+    border-radius: var(--radius);
+    font-size: 1.08rem;
+    resize: none;
+    background: #fff;
+}
+button[type=submit] {
+    background: var(--accent);
+    color: #fff;
+    padding: .8rem 1.6rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: bold;
+    font-size: 1.11rem;
+    transition: var(--transition);
+    cursor: pointer;
+}
+button[type=submit]:hover {
+    background: var(--sec);
+}
+
+footer {
+    background: var(--main);
+    color: #fff;
+    text-align: center;
+    padding: 1.2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 900px) {
+    .cards {
+        flex-direction: column;
+        gap: 2.5rem;
+        align-items: center;
+    }
+    .servicios, .about, .contacto {
+        padding-left: 0.3rem;
+        padding-right: 0.3rem;
+    }
+}
 
