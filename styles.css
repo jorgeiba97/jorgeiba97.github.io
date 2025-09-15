@@ -22,6 +22,11 @@ header {
     align-items: center;
     background: var(--main);
     padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
 .logo {
@@ -285,6 +290,7 @@ footer {
 /* ==========================================================================
    FAQ SECTION - SIMPLE ACCORDION
    ========================================================================== */
+
 /* FAQ Container - Clean and minimal styling */
 .faq {
     padding: 2rem 1rem;
