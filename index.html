@@ -46,7 +46,7 @@
                     <line x1="75" y1="55" x2="70" y2="70" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
                     <line x1="50" y1="70" x2="70" y2="70" stroke="#ffffff" stroke-width="2" opacity="0.8"/>
                     <!-- Gear elements for automation -->
-                    <circle cx="85" cy="35" r="8" stroke="#ffffff" stroke-width="2" fill="none"/>
+                    <circle cx="85" cy="35" r="8" fill="none" stroke="#ffffff" stroke-width="2"/>
                     <path d="M85 30v10M80 35h10M82.9 32.1l4.2 4.2M87.1 32.1l-4.2 4.2" stroke="#ffffff" stroke-width="1.5"/>
                 </svg>
             </div>
@@ -114,13 +114,14 @@
     
     <section id="contacto" class="contacto">
         <h2>Contáctanos</h2>
-        <form>
+        <form id="contact-form">
             <input type="text" placeholder="Nombre" required>
             <input type="email" placeholder="Email" required>
             <input type="text" placeholder="Empresa">
             <textarea placeholder="Mensaje" rows="5" required></textarea>
             <button type="submit">Enviar mensaje</button>
         </form>
+        <div class="form-feedback" id="form-feedback" style="display: none;"></div>
     </section>
     
     <footer>
@@ -145,6 +146,31 @@
         
         document.querySelectorAll('.card, .about, form').forEach(el => {
             observer.observe(el);
+        });
+        
+        // Form submission handling
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const feedback = document.getElementById('form-feedback');
+            feedback.innerHTML = 'Mensaje enviado ✓';
+            feedback.style.display = 'block';
+            feedback.style.color = '#28a745';
+            feedback.style.fontWeight = 'bold';
+            feedback.style.marginTop = '1rem';
+            feedback.style.padding = '0.75rem';
+            feedback.style.backgroundColor = '#d4edda';
+            feedback.style.border = '1px solid #c3e6cb';
+            feedback.style.borderRadius = '4px';
+            
+            // Clear form fields
+            this.reset();
+            
+            // Hide message after 5 seconds
+            setTimeout(() => {
+                feedback.style.display = 'none';
+            }, 5000);
         });
     </script>
 </body>
