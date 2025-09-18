@@ -1,1 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ImprobIA - Demos de proyectos web y soluciones de Inteligencia Artificial.">
+    <title>ImprobIA - Demos de Proyectos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            color: #ffffff;
+            font-weight: 600;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #5dade2;
+        }
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        /* Header */
+        header {
+            background-color: rgba(44, 62, 80, 0.9);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        header.sticky {
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav li {
+            margin-left: 25px;
+        }
+        nav a {
+            color: #ecf0f1;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* Hero Section (adaptado para Demos) */
+        .hero {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.95)), url('https://placehold.co/1200x800/2c3e50/ffffff?text=Fondo+Abstracto') no-repeat center center/cover;
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+        }
+        .hero-content {
+            max-width: 800px;
+        }
+        .hero-content h2 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            color: #ffffff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+        }
+
+        /* Demo Buttons Section */
+        .demos-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .demo-btn {
+            display: inline-block;
+            background-color: #3498DB;
+            color: #ffffff;
+            padding: 1rem 2.5rem;
+            border: 2px solid #3498DB;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            width: 80%;
+            max-width: 400px;
+        }
+        .demo-btn:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            color: #fff;
+        }
+
+        /* Contacto Section */
+        .contacto {
+            background-color: #34495e;
+        }
+        .contacto form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .contacto form.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .contacto label {
+            text-align: left;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .contacto input, .contacto textarea {
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border: 1px solid #7f8c8d;
+            background-color: #5d6d7e;
+            color: #ecf0f1;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .contacto input::placeholder, .contacto textarea::placeholder {
+            color: #bdc3c7;
+        }
+        .contacto button {
+            padding: 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .contacto button:hover {
+            background-color: #2980b9;
+        }
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            background-color: #1DA851;
+            color: #fff;
+        }
+        .whatsapp-btn svg {
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #34495e;
+        }
+
+        /* Animaciones */
+        .demos-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .demos-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            nav li {
+                margin: 0.5rem 0;
+            }
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="sticky">
+        <h1 class="logo">
+            <img src="https://raw.githubusercontent.com/Improbus-dev/ImprobIA/main/improbia.png" alt="ImprobIA - Logotipo de consultoría en inteligencia artificial y desarrollo web" style="height: 1.8em; vertical-align: middle; margin-right: 0.5em; border-radius: 50%;">
+            ImprobIA
+        </h1>
+        <nav>
+            <ul>
+                <!-- Enlaces apuntan a la página principal -->
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="index.html#about">Sobre ImprobIA</a></li>
+                <li><a href="index.html#faq">FAQ</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Demos de Proyectos</h2>
+            <p>Explora algunos de nuestros trabajos de desarrollo web y soluciones personalizadas. Cada demo es una muestra de nuestro compromiso con la calidad, la funcionalidad y el diseño moderno.</p>
+            <div class="demos-container">
+                <a href="demo1.html" class="demo-btn">Ver Demo 1</a>
+                <a href="demo2.html" class="demo-btn">Ver Demo 2</a>
+                <a href="demo3.html" class="demo-btn">Ver Demo 3</a>
+                <a href="demo4.html" class="demo-btn">Ver Demo 4</a>
+                <a href="demo5.html" class="demo-btn">Ver Demo 5</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contacto" class="contacto">
+        <h2>Contáctanos</h2>
+        <form action="https://formspree.io/f/myzdodjn" method="POST" autocomplete="off">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="phone">Teléfono</label>
+            <input type="text" id="phone" name="phone" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+            
+            <button type="submit">Enviar</button>
+        </form>
+        <div class="form-feedback" id="form-feedback" style="display: none;"></div>
+        
+        <!-- Botón de WhatsApp -->
+        <a href="https://wa.me/34684059633/?text=Hola%20Me%20gustaría%20tener%20una%20reunión%20y%20solicitar%20información" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438C8.34 21.475 10.11 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.138 14.552c-.223.629-1.317 1.158-1.817 1.227-.499.069-1.021.093-1.642-.104-.377-.12-.858-.28-1.474-.488-2.626-1.136-4.34-3.822-4.473-3.998-.133-.176-1.085-1.463-1.085-2.792 0-1.329.688-1.984 1.042-2.248.354-.264.772-.33 1.042-.33.265 0 .53.012.76.022.243.012.57-.092.893.681.33.789 1.123 2.731 1.222 2.93.099.199.166.43.033.694-.133.264-.199.43-.398.66-.199.231-.418.517-.597.694-.199.199-.407.414-.176.813.231.4.03 1.84 2.135 2.972.528.282.931.377 1.275.473.344.096.554.08.759-.05.205-.132.51-.629.646-.847.137-.218.273-.182.459-.109.186.073 1.184.559 1.388.66.204.1.341.15.392.232.052.083.052.481-.171 1.11z"/>
+            </svg>
+            Contactar por WhatsApp
+        </a>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 ImprobIA. Todos los derechos reservados.</p>
+    </footer>
+    
+    <script>
+        // Intersection Observer para animaciones al hacer scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1 // El elemento se considera visible cuando el 10% está en pantalla
+        });
+        
+        // Observar el contenedor de demos y el formulario
+        document.querySelectorAll('.demos-container, .contacto form').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
 
