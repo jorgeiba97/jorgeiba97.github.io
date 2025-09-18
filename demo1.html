@@ -1,1 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horchatería Deliciosa - Asesoría Demo</title>
+    
+    <!-- Tailwind CSS para un diseño moderno y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet.js para el mapa interactivo -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Google Fonts para una tipografía elegante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos personalizados para complementar Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF5; /* Un color crema muy suave */
+        }
+        .title-font {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Asegurarse de que el mapa tenga una altura definida */
+        #map {
+            height: 400px;
+            border-radius: 0.75rem; /* Bordes redondeados para el mapa */
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Contenedor Principal -->
+    <div class="container mx-auto px-4 py-8 md:py-16">
+
+        <!-- Cabecera -->
+        <header class="text-center mb-12 md:mb-20">
+            <h1 class="title-font text-5xl md:text-7xl font-bold text-emerald-800">Horchatería Deliciosa</h1>
+            <p class="mt-4 text-lg text-gray-600">El sabor auténtico de la tradición</p>
+        </header>
+
+        <!-- Sección de la Carta -->
+        <section id="carta">
+            <h2 class="title-font text-4xl font-bold text-center mb-10">Nuestra Carta</h2>
+            
+            <!-- Grid para los productos de la carta -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Producto 1: Horchata -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/A3D4C8/333333?text=Horchata" alt="Imagen de horchata fresca" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Horchata Tradicional</h3>
+                        <p class="text-gray-600 mb-4">Refrescante y dulce, elaborada con las mejores chufas de Valencia.</p>
+                        <span class="text-xl font-bold text-emerald-700">3.50€</span>
+                    </div>
+                </div>
+
+                <!-- Producto 2: Fartons -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/F0E68C/333333?text=Fartons" alt="Imagen de fartons esponjosos" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Fartons Artesanos</h3>
+                        <p class="text-gray-600 mb-4">El acompañante perfecto para tu horchata. Tiernos y esponjosos.</p>
+                        <span class="text-xl font-bold text-emerald-700">1.20€ / ud.</span>
+                    </div>
+                </div>
+                
+                <!-- Producto 3: Granizado de Limón -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/FFFACD/333333?text=Granizado" alt="Imagen de un granizado de limón" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Granizado de Limón</h3>
+                        <p class="text-gray-600 mb-4">El clásico del verano, hecho con limones frescos exprimidos.</p>
+                        <span class="text-xl font-bold text-emerald-700">3.00€</span>
+                    </div>
+                </div>
+
+                <!-- Producto 4: Helado de Turrón -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/D2B48C/333333?text=Helado" alt="Imagen de helado de turrón" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Helado de Turrón</h3>
+                        <p class="text-gray-600 mb-4">Cremoso helado artesanal con trocitos de turrón de Jijona.</p>
+                        <span class="text-xl font-bold text-emerald-700">3.80€</span>
+                    </div>
+                </div>
+                
+                <!-- Producto 5: Chocolate con Buñuelos -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/8B4513/FFFFFF?text=Buñuelos" alt="Imagen de chocolate con buñuelos" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Chocolate y Buñuelos</h3>
+                        <p class="text-gray-600 mb-4">Caliente y reconfortante. Ideal para los días más frescos.</p>
+                        <span class="text-xl font-bold text-emerald-700">4.50€</span>
+                    </div>
+                </div>
+                
+                <!-- Producto 6: Agua de Valencia -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/FFA500/FFFFFF?text=Agua+de+Valencia" alt="Imagen de Agua de Valencia" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Agua de Valencia</h3>
+                        <p class="text-gray-600 mb-4">Nuestro cóctel especial con zumo de naranja natural y un toque secreto.</p>
+                        <span class="text-xl font-bold text-emerald-700">5.00€ / copa</span>
+                    </div>
+                </div>
+
+                <!-- Producto 7: Coca de Llanda -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img src="https://placehold.co/600x400/CD853F/FFFFFF?text=Coca+de+Llanda" alt="Imagen de Coca de Llanda" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Coca de Llanda</h3>
+                        <p class="text-gray-600 mb-4">Bizcocho casero tradicional valenciano, esponjoso y delicioso.</p>
+                        <span class="text-xl font-bold text-emerald-700">2.50€ / porción</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Sección del Mapa -->
+        <section id="ubicacion" class="mt-16 md:mt-24">
+            <h2 class="title-font text-4xl font-bold text-center mb-10">Encuéntranos</h2>
+            <div class="bg-white p-4 rounded-xl shadow-lg">
+                <div id="map" class="w-full z-0"></div>
+            </div>
+             <p class="text-center mt-4 text-gray-600">Carrer de la Pau, 25, 46003 València, España</p>
+        </section>
+        
+    </div>
+
+    <!-- Footer con Redes Sociales -->
+    <footer class="bg-emerald-800 text-white mt-12 md:mt-20">
+        <div class="container mx-auto px-4 py-8 text-center">
+            <p class="mb-4">¡Síguenos en nuestras redes sociales!</p>
+            <div class="flex justify-center space-x-6">
+                <!-- Icono de Instagram -->
+                <a href="#" class="hover:opacity-75 transition-opacity">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.48 3.68c.636-.247 1.363-.416 2.427-.465C9.93 2.013 10.284 2 12.315 2zm0 1.625c-2.373 0-2.69.01-3.633.053-.945.044-1.52.196-1.956.368-.504.207-.864.47-1.22.827-.355.356-.62.716-.827 1.22-.172.436-.324 1.01-.368 1.956-.043.943-.053 1.26-.053 3.633s.01 2.69.053 3.633c.044.945.196 1.52.368 1.956.207.504.47.864.827 1.22.356.355.716.62 1.22.827.436.172 1.01.324 1.956.368.943.043 1.26.053 3.633.053s2.69-.01 3.633-.053c.945-.044 1.52-.196 1.956-.368.504-.207.864-.47 1.22-.827.355-.356.62-.716.827-1.22.172-.436.324-1.01.368-1.956.043-.943.053-1.26.053-3.633s-.01-2.69-.053-3.633c-.044-.945-.196-1.52-.368-1.956-.207-.504-.47-.864-.827-1.22-.356-.355-.716-.62-1.22-.827-.436-.172-1.01-.324-1.956-.368-.943-.043-1.26-.053-3.633-.053zM12 8.118a4.125 4.125 0 100 8.25 4.125 4.125 0 000-8.25zM12 14.75a2.5 2.5 0 110-5 2.5 2.5 0 010 5zm5.85-6.645a.968.968 0 100-1.935.968.968 0 000 1.935z" clip-rule="evenodd" /></svg>
+                </a>
+                <!-- Icono de Facebook -->
+                <a href="#" class="hover:opacity-75 transition-opacity">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                </a>
+                <!-- Icono de TikTok -->
+                <a href="#" class="hover:opacity-75 transition-opacity">
+                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.86-.95-6.43-2.88-1.57-1.92-2.24-4.59-1.9-7.18.34-2.59 1.84-4.86 3.8-6.43 2.02-1.62 4.5-2.34 6.99-2.22v4.02c-1.11-.02-2.22-.01-3.33-.01-1.02 0-2.04.38-2.78 1.18-.78.84-1.16 1.96-1.14 3.08.02 1.14.49 2.19 1.32 2.94.85.78 1.99 1.17 3.11 1.15 1.11-.02 2.22-.42 2.95-1.22.78-.85 1.16-1.98 1.16-3.13 0-1.56-.01-3.12-.01-4.68z"/></svg>
+                </a>
+            </div>
+            <p class="text-sm mt-6 text-gray-300">&copy; 2024 Horchatería Deliciosa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicialización del mapa interactivo con Leaflet.js
+        // Se utiliza una dirección aleatoria en Valencia, como solicitado.
+        const lat = 39.4702;
+        const lng = -0.3768;
+
+        // Crear el mapa y centrarlo en las coordenadas
+        var map = L.map('map').setView([lat, lng], 16);
+
+        // Añadir la capa de mapa base de OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Añadir un marcador en la ubicación
+        var marker = L.marker([lat, lng]).addTo(map);
+
+        // Añadir un popup al marcador
+        marker.bindPopup("<b>Horchatería Deliciosa</b><br>Carrer de la Pau, 25<br>46003 València").openPopup();
+    </script>
+</body>
+</html>
 
