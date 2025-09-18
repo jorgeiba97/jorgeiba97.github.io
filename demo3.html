@@ -3,309 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Snake - Dificultad Progresiva</title>
+    <title>Formulario de Soporte</title>
     <style>
+        :root {
+            --primary-gradient: linear-gradient(to right, #3b82f6, #8b5cf6);
+            --primary-gradient-hover: linear-gradient(to right, #2563eb, #7c3aed);
+            --input-bg: #f9fafb;
+            --border-color: #e5e7eb;
+            --focus-ring: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #eff6ff, #ffffff, #f5f3ff);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #222;
-            font-family: Arial, sans-serif;
+            padding: 1rem;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            padding: 2rem;
+            width: 100%;
+            max-width: 28rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .icon-container {
+            width: 4rem;
+            height: 4rem;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+        
+        .icon-container svg {
+            width: 2rem;
+            height: 2rem;
             color: white;
         }
         
-        h1 {
-            margin-bottom: 20px;
+        h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
         }
         
-        #game-container {
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
             position: relative;
         }
         
-        #game-canvas {
-            border: 3px solid #555;
-            background-color: #000;
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
         }
         
-        #score-display {
-            font-size: 24px;
-            margin: 15px 0;
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--focus-ring);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
         }
         
-        #level-display {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: #0f0;
+        input, textarea {
+            background: var(--input-bg);
         }
         
-        #game-over {
+        label {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            display: none;
+            left: 1rem;
+            top: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        input:focus + label, 
+        input:not(:placeholder-shown) + label,
+        textarea:focus + label,
+        textarea:not(:placeholder-shown) + label {
+            top: -0.5rem;
+            left: 0.75rem;
+            font-size: 0.75rem;
+            color: var(--focus-ring);
+            background: white;
+            padding: 0 0.25rem;
+        }
+        
+        select {
+            appearance: none;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3e%3cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+        
+        textarea {
+            resize: none;
+            min-height: 6rem;
         }
         
         button {
-            background-color: #4CAF50;
-            border: none;
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--primary-gradient);
             color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 10px 2px;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
             cursor: pointer;
-            border-radius: 5px;
+            transition: all 0.3s ease;
         }
         
-        .controls {
-            margin-top: 20px;
+        button:hover:not(:disabled) {
+            background: var(--primary-gradient-hover);
+            transform: scale(1.02);
+        }
+        
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .spinner {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .footer {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer p {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Snake Game</h1>
-    <div id="score-display">Puntuación: 0</div>
-    <div id="level-display">Nivel: 1</div>
-    <div id="game-container">
-        <canvas id="game-canvas" width="400" height="400"></canvas>
-        <div id="game-over">
-            <h2>¡Game Over!</h2>
-            <p id="final-score">Tu puntuación: 0</p>
-            <p id="final-level">Nivel alcanzado: 1</p>
-            <button id="restart-button">Jugar de nuevo</button>
+    <div class="card">
+        <div class="header">
+            <div class="icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                </svg>
+            </div>
+            <h2>Soporte</h2>
+            <p class="subtitle">Estamos aquí para ayudarte</p>
         </div>
-    </div>
-    <div class="controls">
-        <p>Usa las flechas del teclado para mover la serpiente</p>
+        
+        <form id="supportForm">
+            <div class="form-group">
+                <input type="text" id="name" name="name" required placeholder=" ">
+                <label for="name">Nombre completo</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" id="email" name="email" required placeholder=" ">
+                <label for="email">Correo electrónico</label>
+            </div>
+            
+            <div class="form-group">
+                <select id="problemType" name="problemType" required>
+                    <option value="" disabled selected>Selecciona un tipo de problema</option>
+                    <option value="technical">Problema Técnico</option>
+                    <option value="billing">Problema de Facturación</option>
+                    <option value="account">Problema con Cuenta</option>
+                    <option value="feature">Solicitud de Funcionalidad</option>
+                    <option value="other">Otro</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="message" name="message" required placeholder=" "></textarea>
+                <label for="message">Describe tu problema</label>
+            </div>
+            
+            <button type="submit" id="submitBtn">
+                <span id="btnText">Enviar Mensaje</span>
+            </button>
+        </form>
+        
+        <div class="footer">
+            <p>Responderemos a tu mensaje dentro de las próximas 24 horas</p>
+        </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('game-canvas');
-            const ctx = canvas.getContext('2d');
-            const scoreDisplay = document.getElementById('score-display');
-            const levelDisplay = document.getElementById('level-display');
-            const gameOverScreen = document.getElementById('game-over');
-            const finalScore = document.getElementById('final-score');
-            const finalLevel = document.getElementById('final-level');
-            const restartButton = document.getElementById('restart-button');
+        document.getElementById('supportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Configuración del juego
-            const gridSize = 20;
-            const tileCount = canvas.width / gridSize;
+            const submitBtn = document.getElementById('submitBtn');
+            const btnText = document.getElementById('btnText');
             
-            let snake = [];
-            let food = {};
-            let direction = 'right';
-            let nextDirection = 'right';
-            let score = 0;
-            let level = 1;
-            let gameSpeed = 150; // Velocidad inicial en ms
-            let gameRunning = false;
-            let gameLoop;
-            let lastTime = 0;
-            let timeSinceLastSpeedIncrease = 0;
-            const speedIncreaseInterval = 10000; // Aumentar dificultad cada 10 segundos
-            const maxSpeed = 50; // Velocidad máxima en ms
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.innerHTML = '<span class="spinner"></span>Enviando...';
             
-            // Inicializar el juego
-            function initGame() {
-                snake = [
-                    {x: 5, y: 10},
-                    {x: 4, y: 10},
-                    {x: 3, y: 10}
-                ];
-                direction = 'right';
-                nextDirection = 'right';
-                score = 0;
-                level = 1;
-                gameSpeed = 150;
-                gameRunning = true;
-                timeSinceLastSpeedIncrease = 0;
+            // Simulate form submission
+            setTimeout(() => {
+                alert('¡Gracias por contactarnos! Hemos recibido tu mensaje.');
                 
-                generateFood();
-                updateScore();
-                updateLevel();
-                
-                if (gameLoop) clearInterval(gameLoop);
-                gameLoop = setInterval(gameUpdate, gameSpeed);
-                
-                gameOverScreen.style.display = 'none';
-            }
-            
-            // Generar comida en posición aleatoria
-            function generateFood() {
-                food = {
-                    x: Math.floor(Math.random() * tileCount),
-                    y: Math.floor(Math.random() * tileCount)
-                };
-                
-                // Asegurarse de que la comida no aparece sobre la serpiente
-                for (let i = 0; i < snake.length; i++) {
-                    if (food.x === snake[i].x && food.y === snake[i].y) {
-                        generateFood();
-                        break;
-                    }
-                }
-            }
-            
-            // Actualizar puntuación
-            function updateScore() {
-                scoreDisplay.textContent = `Puntuación: ${score}`;
-            }
-            
-            // Actualizar nivel
-            function updateLevel() {
-                levelDisplay.textContent = `Nivel: ${level}`;
-            }
-            
-            // Manejar el aumento de dificultad
-            function increaseDifficulty(currentTime) {
-                if (currentTime - lastTime >= speedIncreaseInterval && gameSpeed > maxSpeed) {
-                    gameSpeed = Math.max(gameSpeed - 10, maxSpeed);
-                    level++;
-                    updateLevel();
-                    
-                    // Reiniciar el temporizador
-                    lastTime = currentTime;
-                    
-                    // Reiniciar el intervalo de juego con la nueva velocidad
-                    clearInterval(gameLoop);
-                    gameLoop = setInterval(gameUpdate, gameSpeed);
-                }
-            }
-            
-            // Actualización del juego
-            function gameUpdate(timestamp) {
-                if (!lastTime) lastTime = timestamp;
-                timeSinceLastSpeedIncrease += gameSpeed;
-                
-                // Aumentar dificultad con el tiempo
-                increaseDifficulty(timeSinceLastSpeedIncrease);
-                
-                // Actualizar dirección
-                direction = nextDirection;
-                
-                // Mover la serpiente
-                const head = {x: snake[0].x, y: snake[0].y};
-                
-                switch (direction) {
-                    case 'up':
-                        head.y--;
-                        break;
-                    case 'down':
-                        head.y++;
-                        break;
-                    case 'left':
-                        head.x--;
-                        break;
-                    case 'right':
-                        head.x++;
-                        break;
-                }
-                
-                // Verificar colisiones con los bordes
-                if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
-                    gameOver();
-                    return;
-                }
-                
-                // Verificar colisiones con el cuerpo
-                for (let i = 0; i < snake.length; i++) {
-                    if (head.x === snake[i].x && head.y === snake[i].y) {
-                        gameOver();
-                        return;
-                    }
-                }
-                
-                // Agregar nueva cabeza
-                snake.unshift(head);
-                
-                // Verificar si se comió la comida
-                if (head.x === food.x && head.y === food.y) {
-                    score += 10;
-                    updateScore();
-                    generateFood();
-                } else {
-                    // Si no se comió la comida, quitar la cola
-                    snake.pop();
-                }
-                
-                // Dibujar el juego
-                drawGame();
-            }
-            
-            // Dibujar el juego
-            function drawGame() {
-                // Limpiar el canvas
-                ctx.fillStyle = 'black';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Dibujar la comida
-                ctx.fillStyle = 'red';
-                ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
-                
-                // Dibujar la serpiente
-                for (let i = 0; i < snake.length; i++) {
-                    // Cabeza de la serpiente (color diferente)
-                    if (i === 0) {
-                        ctx.fillStyle = '#00ff00';
-                    } else {
-                        // Cuerpo de la serpiente con degradado
-                        const greenValue = Math.max(100, 255 - (i * 5));
-                        ctx.fillStyle = `rgb(0, ${greenValue}, 0)`;
-                    }
-                    
-                    ctx.fillRect(snake[i].x * gridSize, snake[i].y * gridSize, gridSize - 1, gridSize - 1);
-                }
-            }
-            
-            // Game Over
-            function gameOver() {
-                gameRunning = false;
-                clearInterval(gameLoop);
-                
-                finalScore.textContent = `Tu puntuación: ${score}`;
-                finalLevel.textContent = `Nivel alcanzado: ${level}`;
-                gameOverScreen.style.display = 'block';
-            }
-            
-            // Manejar eventos del teclado
-            document.addEventListener('keydown', (e) => {
-                if (!gameRunning) return;
-                
-                switch (e.key) {
-                    case 'ArrowUp':
-                        if (direction !== 'down') nextDirection = 'up';
-                        break;
-                    case 'ArrowDown':
-                        if (direction !== 'up') nextDirection = 'down';
-                        break;
-                    case 'ArrowLeft':
-                        if (direction !== 'right') nextDirection = 'left';
-                        break;
-                    case 'ArrowRight':
-                        if (direction !== 'left') nextDirection = 'right';
-                        break;
-                }
-            });
-            
-            // Reiniciar juego
-            restartButton.addEventListener('click', initGame);
-            
-            // Iniciar el juego
-            initGame();
+                // Reset form and button
+                this.reset();
+                submitBtn.disabled = false;
+                btnText.textContent = 'Enviar Mensaje';
+            }, 1500);
         });
     </script>
 </body>
