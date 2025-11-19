@@ -14,16 +14,30 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Inicialización temprana de tema para evitar FOUC -->
+    <script>
+      (() => {
+        try {
+          const ls = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const isDark = ls ? ls === 'dark' : prefersDark;
+          if (isDark) document.documentElement.classList.add('dark');
+          else document.documentElement.classList.remove('dark');
+        } catch (e) {}
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              main: '#2C3E50',
-              sec: '#34495E',
-              accent: '#3498DB',
-              bg: '#ECF0F1'
+              // Paleta de branding actualizada (modo claro/oscuro se maneja con clases dark)
+              main: '#0F172A',
+              sec: '#94A3B8',
+              accent: '#22D3EE',
+              bg: '#F8FAFC'
             }
           }
         }
@@ -34,7 +48,7 @@
       @keyframes glowPulse { 0%,100% { box-shadow: 0 0 0 rgba(52,152,219,0);} 50% { box-shadow: 0 0 30px rgba(52,152,219,.35);} }
     </style>
   </head>
-  <body class="min-h-screen bg-bg text-main font-[Montserrat]">
+  <body class="min-h-screen bg-bg text-main font-[Montserrat] dark:bg-[#0B1220] dark:text-[#E6EDF3]">
     <header class="sticky top-0 z-50 bg-main/80 backdrop-blur supports-[backdrop-filter]:bg-main/60">
       <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between">
         <a href="#" class="flex items-center gap-3 text-white font-semibold text-lg select-none">
@@ -53,14 +67,24 @@
             <li><a href="#contacto" class="hover:text-accent">Contacto</a></li>
           </ul>
         </nav>
+        <!-- Toggle de tema (desktop) -->
+        <button id="theme-toggle" aria-label="Cambiar tema" class="hidden md:inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-white hover:bg-white/10 transition">
+          <svg id="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.76 4.84l-1.8-1.79L3.17 4.84l1.79 1.8 1.8-1.8zm10.48 0l1.79-1.79 1.79 1.79-1.79 1.8-1.79-1.8zM12 3h0a1 1 0 011-1h0a1 1 0 011 1h0a1 1 0 01-1 1h0a1 1 0 01-1-1zm0 18h0a1 1 0 011 1h0a1 1 0 01-1 1h0a1 1 0 01-1-1h0a1 1 0 011-1zm9-9h0a1 1 0 011 1h0a1 1 0 01-1 1h0a1 1 0 01-1-1h0a1 1 0 011-1zM4 12h0a1 1 0 01-1 1h0a1 1 0 011-1h0a1 1 0 011-1h0a1 1 0 01-1 1zM12 7a5 5 0 100 10 5 5 0 000-10z"/></svg>
+          <svg id="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="hidden"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+          <span class="sr-only">Tema</span>
+        </button>
       </div>
       <!-- Mobile drawer -->
-      <div id="mobile-drawer" class="hidden md:hidden bg-main text-white border-t border-white/10">
+      <div id="mobile-drawer" class="hidden md:hidden bg-main text-white border-t border-white/10 dark:bg-[#0F172A]">
         <div class="mx-auto max-w-7xl px-4 py-3 grid gap-2">
           <a class="py-2 hover:text-accent" href="#servicios">Servicios</a>
           <a class="py-2 hover:text-accent" href="#about">Sobre ImprobIA</a>
           <a class="py-2 hover:text-accent" href="#faq">FAQ</a>
           <a class="py-2 hover:text-accent" href="#contacto">Contacto</a>
+          <button id="theme-toggle-mobile" class="mt-2 inline-flex items-center gap-2 rounded-lg border border-white/20 px-3 py-2 text-white hover:bg-white/10 transition">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z"/></svg>
+            Cambiar tema
+          </button>
         </div>
       </div>
     </header>
@@ -97,25 +121,25 @@
       </div>
     </section>
 
-    <section id="servicios" class="bg-white">
+    <section id="servicios" class="bg-white dark:bg-[#0F172A]">
       <div class="mx-auto max-w-6xl px-4 py-16">
         <h2 class="text-2xl md:text-3xl font-bold text-center mb-10">¿Qué ofrecemos?</h2>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="group rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 opacity-0 translate-y-6 transition duration-700 [transform-style:preserve-3d] hover:[transform:rotateX(2deg)_rotateY(-2deg)]" data-reveal>
+          <div class="group rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 opacity-0 translate-y-6 transition duration-700 [transform-style:preserve-3d] hover:[transform:rotateX(2deg)_rotateY(-2deg)] dark:bg-[#0B1220] dark:text-[#E6EDF3] dark:ring-white/10" data-reveal>
             <div class="mb-3 inline-flex items-center justify-center rounded-xl bg-accent/10 text-accent p-3">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l4 8-4 2-4-2 4-8zm0 14a4 4 0 110 8 4 4 0 010-8z"/></svg>
             </div>
             <h3 class="text-accent font-semibold mb-2">Consultoría de IA</h3>
             <p>Automatización de procesos, análisis de datos, asistentes virtuales y soluciones personalizadas.</p>
           </div>
-          <div class="group rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 opacity-0 translate-y-6 transition duration-700 [transform-style:preserve-3d] hover:[transform:rotateX(2deg)_rotateY(-2deg)]" data-reveal>
+          <div class="group rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 opacity-0 translate-y-6 transition duration-700 [transform-style:preserve-3d] hover:[transform:rotateX(2deg)_rotateY(-2deg)] dark:bg-[#0B1220] dark:text-[#E6EDF3] dark:ring-white/10" data-reveal>
             <div class="mb-3 inline-flex items-center justify-center rounded-xl bg-accent/10 text-accent p-3">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M3 4h18v2H3v14h18V8H3V4zm5 6h4v6H8v-6z"/></svg>
             </div>
             <h3 class="text-accent font-semibold mb-2">Desarrollo Web</h3>
             <p>Sitios web modernos, responsive y optimizados para SEO. Desde landing pages hasta e-commerce.</p>
           </div>
-          <div class="group rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 opacity-0 translate-y-6 transition duration-700 [transform-style:preserve-3d] hover:[transform:rotateX(2deg)_rotateY(-2deg)]" data-reveal>
+          <div class="group rounded-2xl bg-white p-6 shadow-lg ring-1 ring-black/5 opacity-0 translate-y-6 transition duration-700 [transform-style:preserve-3d] hover:[transform:rotateX(2deg)_rotateY(-2deg)] dark:bg-[#0B1220] dark:text-[#E6EDF3] dark:ring-white/10" data-reveal>
             <div class="mb-3 inline-flex items-center justify-center rounded-xl bg-accent/10 text-accent p-3">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6l4 4H8l4-4zm0 12l-4-4h8l-4 4z"/></svg>
             </div>
@@ -129,13 +153,13 @@
       </div>
     </section>
 
-    <section id="about" class="bg-bg">
+    <section id="about" class="bg-bg dark:bg-[#0B1220]">
       <div class="mx-auto max-w-7xl px-4 py-16 grid md:grid-cols-2 gap-8 items-center">
         <div class="opacity-0 translate-y-6 transition duration-700" data-reveal>
           <h2 class="text-2xl md:text-3xl font-bold mb-4">Sobre ImprobIA</h2>
           <p class="mb-3">Somos una consultora especializada en brindar soluciones tecnológicas avanzadas a pequeñas y medianas empresas. Nuestro enfoque se centra en la implementación de Inteligencia Artificial, desarrollo web y automatización de procesos para impulsar el crecimiento y la eficiencia de tu negocio.</p>
           <p>Con un equipo de expertos en tecnología y un profundo conocimiento del mercado PYME, desarrollamos estrategias personalizadas que se adaptan a las necesidades específicas de cada cliente.</p>
-          <ul class="mt-4 space-y-2 text-sec">
+          <ul class="mt-4 space-y-2 text-sec dark:text-[#C7D2FE]">
             <li class="flex items-center gap-2"><span class="inline-block h-2 w-2 rounded-full bg-accent"></span>Soluciones a medida</li>
             <li class="flex items-center gap-2"><span class="inline-block h-2 w-2 rounded-full bg-accent"></span>Enfoque en resultados</li>
             <li class="flex items-center gap-2"><span class="inline-block h-2 w-2 rounded-full bg-accent"></span>Acompañamiento continuo</li>
@@ -143,35 +167,35 @@
         </div>
         <div class="opacity-0 translate-y-6 transition duration-700" data-reveal>
           <div class="relative mx-auto max-w-sm">
-            <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-accent/30 to-white/30 blur"></div>
+            <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-accent/30 to-white/30 blur dark:to-white/10"></div>
             <img src="improbia.png" alt="ImprobIA" class="relative rounded-3xl shadow-lg ring-1 ring-black/5" />
           </div>
         </div>
       </div>
     </section>
 
-    <section id="faq" class="bg-white">
+    <section id="faq" class="bg-white dark:bg-[#0F172A]">
       <div class="mx-auto max-w-3xl px-4 py-14">
         <h2 class="text-2xl md:text-3xl font-bold mb-6">Preguntas Frecuentes</h2>
         <div class="space-y-4">
-          <details class="group rounded-xl border border-sec/20 bg-bg p-4 transition">
+          <details class="group rounded-xl border border-sec/20 bg-bg p-4 transition dark:border-white/10 dark:bg-[#0B1220]">
             <summary class="cursor-pointer font-semibold flex items-center justify-between">
               <span>¿Qué es la Inteligencia Artificial y cómo puede beneficiar a mi PYME?</span>
-              <span class="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-main group-open:bg-accent group-open:text-white transition">+</span>
+              <span class="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-main group-open:bg-accent group-open:text-white transition dark:bg-[#111827] dark:text-white">+</span>
             </summary>
             <p class="mt-2 text-sec">La IA puede automatizar tareas repetitivas, analizar datos para tomar mejores decisiones, mejorar la atención al cliente y optimizar procesos. Para PYMES, esto significa ahorro de tiempo, reducción de costos y mayor competitividad.</p>
           </details>
-          <details class="group rounded-xl border border-sec/20 bg-bg p-4 transition">
+          <details class="group rounded-xl border border-sec/20 bg-bg p-4 transition dark:border-white/10 dark:bg-[#0B1220]">
             <summary class="cursor-pointer font-semibold flex items-center justify-between">
               <span>¿Cuánto tiempo toma implementar una solución de IA?</span>
-              <span class="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-main group-open:bg-accent group-open:text-white transition">+</span>
+              <span class="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-main group-open:bg-accent group-open:text-white transition dark:bg-[#111827] dark:text-white">+</span>
             </summary>
             <p class="mt-2 text-sec">Depende de la complejidad del proyecto. Las soluciones básicas pueden implementarse en 2-4 semanas, mientras que proyectos más complejos pueden tomar 2-3 meses. Siempre comenzamos con una evaluación detallada.</p>
           </details>
-          <details class="group rounded-xl border border-sec/20 bg-bg p-4 transition">
+          <details class="group rounded-xl border border-sec/20 bg-bg p-4 transition dark:border-white/10 dark:bg-[#0B1220]">
             <summary class="cursor-pointer font-semibold flex items-center justify-between">
               <span>¿Ofrecen soporte post-implementación?</span>
-              <span class="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-main group-open:bg-accent group-open:text-white transition">+</span>
+              <span class="ml-4 inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-main group-open:bg-accent group-open:text-white transition dark:bg-[#111827] dark:text-white">+</span>
             </summary>
             <p class="mt-2 text-sec">Sí, proporcionamos soporte continuo, actualizaciones y mantenimiento. También ofrecemos capacitación para que tu equipo pueda aprovechar al máximo las herramientas implementadas.</p>
           </details>
@@ -179,26 +203,26 @@
       </div>
     </section>
 
-    <section id="contacto" class="bg-white">
+    <section id="contacto" class="bg-white dark:bg-[#0F172A]">
       <div class="mx-auto max-w-3xl px-4 py-14">
         <h2 class="text-2xl md:text-3xl font-bold text-center mb-6">Contáctanos</h2>
         <div class="grid md:grid-cols-2 gap-8">
-          <form action="https://formspree.io/f/myzdodjn" method="POST" autocomplete="off" class="mx-auto w-full grid gap-4 rounded-2xl bg-bg p-6 shadow">
+          <form action="https://formspree.io/f/myzdodjn" method="POST" autocomplete="off" class="mx-auto w-full grid gap-4 rounded-2xl bg-bg p-6 shadow dark:bg-[#0B1220]">
             <label for="nombre" class="font-semibold">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none" />
+            <input type="text" id="nombre" name="nombre" required class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none dark:bg-[#0F172A] dark:text-white dark:border-white/10 placeholder:text-sec dark:placeholder:text-white/60" />
 
             <label for="phone" class="font-semibold">Teléfono</label>
-            <input type="text" id="phone" name="phone" required class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none" />
+            <input type="text" id="phone" name="phone" required class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none dark:bg-[#0F172A] dark:text-white dark:border-white/10 placeholder:text-sec dark:placeholder:text-white/60" />
 
             <label for="email" class="font-semibold">Email</label>
-            <input type="email" id="email" name="email" required class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none" />
+            <input type="email" id="email" name="email" required class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none dark:bg-[#0F172A] dark:text-white dark:border-white/10 placeholder:text-sec dark:placeholder:text-white/60" />
 
             <label for="mensaje" class="font-semibold">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" required rows="5" class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none"></textarea>
+            <textarea id="mensaje" name="mensaje" required rows="5" class="rounded-lg border border-sec/40 bg-white px-4 py-2 focus:border-accent outline-none dark:bg-[#0F172A] dark:text-white dark:border-white/10 placeholder:text-sec dark:placeholder:text-white/60"></textarea>
 
             <button type="submit" class="mt-2 inline-flex justify-center rounded-full bg-accent px-6 py-3 font-semibold text-white shadow hover:bg-blue-600 transition">Enviar</button>
           </form>
-          <div class="rounded-2xl bg-white p-6 shadow ring-1 ring-black/5">
+          <div class="rounded-2xl bg-white p-6 shadow ring-1 ring-black/5 dark:bg-[#0F172A] dark:text-white dark:ring-white/10">
             <h3 class="text-lg font-semibold mb-3">Información de contacto</h3>
             <p class="text-sec">¿Prefieres hablar directamente? Escríbenos o agenda una llamada.</p>
             <div class="mt-4 space-y-2">
@@ -218,7 +242,7 @@
       </div>
     </section>
 
-    <footer class="bg-main text-white">
+    <footer class="bg-main text-white dark:bg-[#0F172A]">
       <div class="mx-auto max-w-6xl px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <p>&copy; 2024 ImprobIA. Todos los derechos reservados.</p>
         <div class="flex items-center gap-3">
@@ -263,6 +287,36 @@
           setTimeout(() => feedback.classList.add('hidden'), 5000);
         });
       }
+
+      // Theme toggle handlers
+      const htmlEl = document.documentElement;
+      const desktopToggle = document.getElementById('theme-toggle');
+      const mobileToggle = document.getElementById('theme-toggle-mobile');
+      const iconSun = document.getElementById('icon-sun');
+      const iconMoon = document.getElementById('icon-moon');
+
+      function setTheme(isDark) {
+        if (isDark) {
+          htmlEl.classList.add('dark');
+          localStorage.setItem('theme', 'dark');
+          if (iconSun && iconMoon) { iconSun.classList.add('hidden'); iconMoon.classList.remove('hidden'); }
+        } else {
+          htmlEl.classList.remove('dark');
+          localStorage.setItem('theme', 'light');
+          if (iconSun && iconMoon) { iconSun.classList.remove('hidden'); iconMoon.classList.add('hidden'); }
+        }
+      }
+
+      function toggleTheme() {
+        const isDark = htmlEl.classList.contains('dark');
+        setTheme(!isDark);
+      }
+
+      // Initialize icon state
+      setTheme(htmlEl.classList.contains('dark'));
+
+      if (desktopToggle) desktopToggle.addEventListener('click', toggleTheme);
+      if (mobileToggle) mobileToggle.addEventListener('click', toggleTheme);
     </script>
   </body>
 </html>
