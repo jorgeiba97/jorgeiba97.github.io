@@ -1,393 +1,51 @@
-:root {
-    --main: #2C3E50;
-    --sec: #34495E;
-    --accent: #3498DB;
-    --bg: #ECF0F1;
-    --card: #FFFFFF;
-    --shadow: 0 4px 24px rgba(44,62,80,0.08);
-    --radius: 18px;
-    --transition: all 0.38s cubic-bezier(.22,.68,.33,1.05);
+/* Custom Utilities that extend Tailwind */
+
+.glass {
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
-body {
-    margin: 0;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    background: var(--bg);
-    color: var(--main);
+
+.glass-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
 }
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--main);
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-}
-.logo {
-    color: #fff;
-    margin: 0;
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-weight: 600;
-}
-nav ul {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
-    position: relative;
-}
-nav a::after {
-    content: '';
-    display: block;
-    background: var(--accent);
-    height: 2px;
-    width: 0%;
-    transition: width 0.3s;
-}
-nav a:hover::after {
-    width: 100%;
-}
-.hero {
-    min-height: 60vh;
-    background: linear-gradient(120deg, var(--main) 60%, var(--accent) 120%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #fff;
-    animation: slideDown 1s cubic-bezier(.36,.54,.49,.89) 0.2s both;
-}
-@keyframes slideDown {
-    0% { opacity: 0; transform: translateY(-45px);}
-    100% { opacity: 1; transform: translateY(0);}
-}
-.hero-content h2 {
-    font-size: 2.6rem;
-    margin-bottom: .5rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-}
-.hero-content p {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-}
-.cta {
-    display: inline-block;
-    background: var(--accent);
-    color: #fff;
-    border-radius: var(--radius);
-    padding: 0.8rem 2.1rem;
-    text-decoration: none;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-    margin-top: .7rem;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-}
-.cta:hover {
-    background: #fff;
-    color: var(--accent);
-    border: 2px solid var(--accent);
-    transform: translateY(-2px);
-}
-.servicios {
-    padding: 3rem 1rem 1rem;
-    background: #fff;
-    text-align: center;
-}
-.servicios h3 {
-    margin-bottom: 2.2rem;
-    font-size: 2.2rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-}
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-}
-.card {
-    background: var(--card);
-    box-shadow: var(--shadow);
-    padding: 2.3rem 1.7rem;
-    border-radius: var(--radius);
-    width: 270px;
-    transition: var(--transition);
-    opacity: 0;
-    transform: translateY(45px);
-}
-.card.visible {
-    opacity: 1;
-    transform: none;
-}
-.card:hover {
+
+.glass-card:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(99, 102, 241, 0.3);
     transform: translateY(-5px);
-    box-shadow: 0 8px 32px rgba(44,62,80,0.15);
+    box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.15);
 }
-.card h4 {
-    color: var(--accent);
-    margin-bottom: .7rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
+
+.text-glow {
+    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
 }
-.card p {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
+
+.gradient-text {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to right, #c084fc, #6366f1, #06b6d4);
 }
-.about {
-    padding: 3rem 1rem 2rem;
-    background: var(--bg);
-    max-width: 740px;
-    margin: auto;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    opacity: 0;
-    transform: translateY(45px);
-    transition: var(--transition);
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 8px;
 }
-.about.visible {
-    opacity: 1;
-    transform: none;
+
+::-webkit-scrollbar-track {
+    background: #020617;
 }
-.about h3 {
-    color: var(--main);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-}
-.about p {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
-}
-.contacto {
-    padding: 3rem 1rem;
-    background: #fff;
-}
-.contacto h3 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-}
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 440px;
-    margin: auto;
-    gap: 1rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 2rem;
-    opacity: 0;
-    transform: translateY(45px);
-    transition: var(--transition);
-    background: var(--bg);
-}
-form.visible {
-    opacity: 1;
-    transform: none;
-}
-input, textarea {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    border: 1.4px solid var(--sec);
-    border-radius: var(--radius);
-    font-size: 1.08rem;
-    font-family: 'Montserrat', sans-serif;
-    resize: none;
-    background: #fff;
-    transition: border-color 0.3s ease;
-}
-input:focus, textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-}
-button[type=submit] {
-    background: var(--accent);
-    color: #fff;
-    padding: .8rem 1.6rem;
-    border: none;
-    border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 1.11rem;
-    font-family: 'Montserrat', sans-serif;
-    transition: var(--transition);
-    cursor: pointer;
-}
-button[type=submit]:hover {
-    background: var(--sec);
-    transform: translateY(-2px);
-}
-footer {
-    background: var(--main);
-    color: #fff;
-    text-align: center;
-    padding: 1.2rem;
-    margin-top: 2rem;
-    font-family: 'Montserrat', sans-serif;
-}
-@media (max-width: 900px) {
-    .cards {
-        flex-direction: column;
-        gap: 2.5rem;
-        align-items: center;
-    }
-    .servicios, .about, .contacto {
-        padding-left: 0.3rem;
-        padding-right: 0.3rem;
-    }
-}
-/* ==========================================================================
-   FAQ SECTION - SIMPLE ACCORDION
-   ========================================================================== */
-/* FAQ Container - Clean and minimal styling */
-.faq {
-    padding: 2rem 1rem;
-    max-width: 800px;
-    margin: 2rem auto;
-}
-/* FAQ Title */
-.faq h2 {
-    text-align: center;
-    color: var(--main);
-    margin-bottom: 2rem;
-    font-size: 2.2rem;
-    font-weight: 600;
-    font-family: 'Montserrat', sans-serif;
-}
-/* FAQ List Container */
-.faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-/* Individual FAQ Item - Minimal styling */
-.faq-item {
-    border: 1px solid #e0e0e0;
+
+::-webkit-scrollbar-thumb {
+    background: #334155;
     border-radius: 4px;
-    overflow: hidden;
-}
-/* FAQ Question Button - Native appearance */
-.faq-question {
-    width: 100%;
-    background: #f8f9fa;
-    color: var(--main);
-    border: none;
-    padding: 1rem 1.5rem;
-    text-align: left;
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: 'Montserrat', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-.faq-question:hover {
-    background: #e9ecef;
-}
-.faq-question:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: -2px;
-}
-/* FAQ Answer Container - Simple collapsible */
-.faq-answer {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-    background: #ffffff;
-}
-.faq-answer.active {
-    max-height: 200px; /* Adjust based on content */
-}
-.faq-answer p {
-    margin: 0;
-    padding: 1rem 1.5rem;
-    color: var(--main);
-    line-height: 1.5;
-    font-size: 0.95rem;
-    font-family: 'Montserrat', sans-serif;
-}
-/* Mobile Responsive - Simple adjustments */
-@media (max-width: 768px) {
-    .faq {
-        padding: 1.5rem 0.5rem;
-        margin: 1rem auto;
-    }
-    
-    .faq h2 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .faq-question {
-        padding: 0.9rem 1rem;
-        font-size: 0.95rem;
-    }
-    
-    .faq-answer p {
-        padding: 0.9rem 1rem;
-        font-size: 0.9rem;
-    }
 }
 
-/* ==========================================================================
-   WHATSAPP BUTTON STYLES
-   ========================================================================== */
-.whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: #25D366;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 1rem 1.5rem;
-    border-radius: var(--radius);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    margin-top: 2rem;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    border: 2px solid #25D366;
-    justify-content: center;
-    max-width: 280px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.whatsapp-btn:hover {
-    background: #1db954;
-    border-color: #1db954;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-btn svg {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .whatsapp-btn {
-        width: 100%;
-        max-width: none;
-        margin-top: 1.5rem;
-        padding: 1rem;
-        font-size: 0.95rem;
-    }
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
 }
