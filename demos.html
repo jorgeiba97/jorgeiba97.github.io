@@ -4,8 +4,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="ImprobIA - Demos interactivas de nuestros proyectos web y soluciones de Inteligencia Artificial." />
+  <meta name="description"
+    content="Explora demostraciones interactivas de nuestros desarrollos web premium, automatizaciones con IA y soluciones inteligentes de negocio para PYMEs." />
   <title>ImprobIA | Demos de Proyectos y Casos de Éxito</title>
+
+  <!-- Etiquetas Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://jorgeiba97.github.io/demos.html" />
+  <meta property="og:title" content="ImprobIA | Demos de Proyectos y Casos de Éxito" />
+  <meta property="og:description" content="Explora demostraciones interactivas de nuestros desarrollos web premium, automatizaciones con IA y soluciones inteligentes." />
+  <meta property="og:image" content="https://jorgeiba97.github.io/improbia.png" />
+
+  <!-- Etiquetas Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ImprobIA | Demos de Proyectos y Casos de Éxito" />
+  <meta name="twitter:description" content="Explora demostraciones interactivas de nuestros desarrollos web premium y automatizaciones con IA." />
+  <meta name="twitter:image" content="https://jorgeiba97.github.io/improbia.png" />
+
+  <!-- Enlace Canonical -->
+  <link rel="canonical" href="https://jorgeiba97.github.io/demos.html" />
+
+  <!-- Marcado de Datos Estructurados JSON-LD (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "ImprobIA",
+    "image": "https://jorgeiba97.github.io/improbia.png",
+    "@id": "https://jorgeiba97.github.io/#organization",
+    "url": "https://jorgeiba97.github.io/",
+    "telephone": "+34684059633",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Madrid",
+      "addressCountry": "ES"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/",
+      "https://www.instagram.com/"
+    ],
+    "description": "Agencia especializada en Consultoría de Inteligencia Artificial, automatizaciones a medida y desarrollo web premium para la digitalización de PYMEs."
+  }
+  </script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -271,7 +312,7 @@
             </div>
           </div>
 
-          <!-- Contact Form with unchanged Formspree logic -->
+          <!-- Contact Form -->
           <form action="https://formspree.io/f/myzdodjn" method="POST" class="md:col-span-3 grid gap-6 text-left" autocomplete="off">
             <div class="grid md:grid-cols-2 gap-6">
               <!-- Name Input -->
@@ -285,7 +326,7 @@
               <div class="form-group">
                 <input type="tel" id="phone" name="phone" required placeholder=" "
                   class="form-input">
-                <label for="phone" class="form-label text-sm">Teléfono</label>
+                <label for="phone" class="form-label text-sm">Teléfono móvil</label>
               </div>
             </div>
 
@@ -293,18 +334,27 @@
             <div class="form-group">
               <input type="email" id="email" name="email" required placeholder=" "
                 class="form-input">
-              <label for="email" class="form-label text-sm">Email</label>
+              <label for="email" class="form-label text-sm">Correo Electrónico</label>
             </div>
 
             <!-- Message Textarea -->
             <div class="form-group">
               <textarea id="mensaje" name="mensaje" rows="4" required placeholder=" "
                 class="form-input"></textarea>
-              <label for="mensaje" class="form-label text-sm">Mensaje sobre tu proyecto</label>
+              <label for="mensaje" class="form-label text-sm">Cuéntanos brevemente qué necesita tu negocio...</label>
             </div>
 
-            <button type="submit" class="btn-primary w-full py-4 text-white text-sm md:text-base font-bold shadow-xl shadow-purple-500/20">
-              <span class="relative z-10">Enviar Mensaje</span>
+            <!-- Casilla RGPD Obligatoria -->
+            <div class="flex items-start gap-3 mt-1">
+              <input type="checkbox" id="privacy" name="privacy" required
+                class="mt-1 w-4 h-4 rounded border-slate-700 bg-slate-900 text-primary focus:ring-primary focus:ring-offset-slate-950">
+              <label for="privacy" class="text-xs text-slate-400 leading-relaxed select-none">
+                Acepto el tratamiento de mis datos personales para recibir mi propuesta comercial personalizada según la <a href="#" class="text-primary-glow underline hover:text-white">Política de Privacidad</a>.
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary w-full py-4 text-white text-sm md:text-base font-bold shadow-xl shadow-purple-500/20 transition-all hover:shadow-purple-500/40">
+              <span class="relative z-10">Solicitar Asesoría Gratuita &rarr;</span>
             </button>
           </form>
         </div>
