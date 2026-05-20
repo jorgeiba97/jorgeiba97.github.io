@@ -271,8 +271,8 @@
             </div>
           </div>
 
-          <!-- Secure Backend Intermediated Contact Form -->
-          <form action="/api/contact" method="POST" id="contact-form" class="md:col-span-3 grid gap-6 text-left" autocomplete="off">
+          <!-- Contact Form with unchanged Formspree logic -->
+          <form action="https://formspree.io/f/myzdodjn" method="POST" class="md:col-span-3 grid gap-6 text-left" autocomplete="off">
             <div class="grid md:grid-cols-2 gap-6">
               <!-- Name Input -->
               <div class="form-group">
@@ -413,141 +413,9 @@
             top: targetPosition,
             behavior: 'smooth'
           });
+        }
       });
     });
-
-    // Premium Toast Notification System
-    const Toast = {
-      createContainer() {
-        let container = document.getElementById('toast-container');
-        if (!container) {
-          container = document.createElement('div');
-          container.id = 'toast-container';
-          document.body.appendChild(container);
-        }
-        return container;
-      },
-
-      show({ message, type = 'info', duration = 5000 }) {
-        const container = this.createContainer();
-        const toast = document.createElement('div');
-        toast.className = `toast toast-${type}`;
-        
-        let iconContent = '';
-        if (type === 'success') {
-          iconContent = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>';
-        } else if (type === 'error') {
-          iconContent = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>';
-        } else if (type === 'loading') {
-          iconContent = '<div class="toast-loading-spinner"></div>';
-        } else {
-          iconContent = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 111.063.852l-.708 2.836a.75.75 0 001.063.852l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-        }
-
-        toast.innerHTML = `
-          <div class="toast-icon">${iconContent}</div>
-          <div class="toast-body">${message}</div>
-          <button class="toast-close" aria-label="Cerrar">&times;</button>
-        `;
-
-        container.appendChild(toast);
-
-        const closeBtn = toast.querySelector('.toast-close');
-        const dismiss = () => {
-          if (toast.classList.contains('toast-out')) return;
-          toast.classList.add('toast-out');
-          toast.addEventListener('animationend', () => {
-            toast.remove();
-          });
-        };
-
-        closeBtn.addEventListener('click', dismiss);
-
-        if (type !== 'loading' && duration > 0) {
-          setTimeout(dismiss, duration);
-        }
-
-        return {
-          dismiss,
-          update({ message: newMsg, type: newType }) {
-            const bodyEl = toast.querySelector('.toast-body');
-            if (bodyEl) bodyEl.textContent = newMsg;
-            if (newType && newType !== type) {
-              toast.className = `toast toast-${newType}`;
-              const iconEl = toast.querySelector('.toast-icon');
-              if (iconEl) {
-                let newIcon = '';
-                if (newType === 'success') {
-                  newIcon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>';
-                } else if (newType === 'error') {
-                  newIcon = '<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>';
-                } else if (newType === 'loading') {
-                  newIcon = '<div class="toast-loading-spinner"></div>';
-                }
-                iconEl.innerHTML = newIcon;
-              }
-            }
-          }
-        };
-      }
-    };
-
-    // Intercept form submissions securely via AJAX Proxy
-    const contactForm = document.getElementById('contact-form');
-    if (contactForm) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const formData = new FormData(contactForm);
-        const payload = {
-          nombre: formData.get('nombre'),
-          phone: formData.get('phone'),
-          email: formData.get('email'),
-          mensaje: formData.get('mensaje')
-        };
-
-        // Trigger gorgeous loading toast
-        const toast = Toast.show({
-          message: 'Enviando su mensaje...',
-          type: 'loading',
-          duration: 0
-        });
-
-        try {
-          const response = await fetch('/api/contact', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          });
-
-          const result = await response.json();
-
-          if (response.ok) {
-            toast.update({
-              message: result.message || '¡Mensaje enviado con éxito!',
-              type: 'success'
-            });
-            setTimeout(() => toast.dismiss(), 4000);
-            contactForm.reset();
-          } else {
-            toast.update({
-              message: result.error || 'Ocurrió un error al enviar el mensaje.',
-              type: 'error'
-            });
-            setTimeout(() => toast.dismiss(), 6000);
-          }
-        } catch (err) {
-          toast.update({
-            message: 'Error de red. Por favor, verifique su conexión.',
-            type: 'error'
-          });
-          setTimeout(() => toast.dismiss(), 5000);
-        }
-      });
-    }
   </script>
 </body>
 
