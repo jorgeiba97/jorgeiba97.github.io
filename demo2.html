@@ -829,6 +829,8 @@
                 return;
             }
             
+            // SECURITY NOTE: innerHTML is safe here because product attributes are read directly from static DOM elements (data-name, data-image) that are hardcoded in the local HTML.
+            // If product data were ever loaded from an external API or database, inputs MUST be sanitized first to prevent DOM-based XSS (e.g., using DOMPurify or textContent for text nodes).
             let itemsHTML = '';
             let total = 0;
             
